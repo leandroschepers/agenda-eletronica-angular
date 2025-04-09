@@ -1,0 +1,11 @@
+<h2>Cadastro</h2>
+<form [formGroup]="registerForm" (ngSubmit)="register()">
+  <input formControlName="name" placeholder="Nome" required />
+  <input formControlName="email" type="email" placeholder="Email" required />
+  <input formControlName="password" type="password" placeholder="Senha" required />
+  <select formControlName="role">
+    <option value="user">User</option>
+    <option value="adm">Admin</option>
+  </select>
+  <button type="submit">Cadastrar</button>
+</form>

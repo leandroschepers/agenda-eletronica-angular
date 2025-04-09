@@ -1,0 +1,25 @@
+<h2 class="title">Agenda</h2>
+
+<div class="form-container">
+  <form [formGroup]="agendaForm" (ngSubmit)="addEvent()" class="agenda-form">
+    <div class="form-group">
+      <input formControlName="title" placeholder="Título" required class="input-field" />
+    </div>
+    <div class="form-group">
+      <input formControlName="date" type="date" required class="input-field" />
+    </div>
+    <div class="form-group">
+      <textarea formControlName="description" placeholder="Descrição" class="textarea-field"></textarea>
+    </div>
+    <button type="submit" class="submit-btn">Adicionar Evento</button>
+  </form>
+</div>
+
+<div class="event-container">
+  <ul class="event-list">
+    <li *ngFor="let event of agenda" class="event-item">
+      <strong>{{ event.title }}</strong> - {{ event.date }}
+      <p>{{ event.description }}</p>
+    </li>
+  </ul>
+</div>

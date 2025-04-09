@@ -1,0 +1,14 @@
+<header>
+  <nav class="navbar">
+    <ul class="navbar-nav">
+      <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+      <li><a routerLink="/register" routerLinkActive="active">Registrar</a></li>
+      <li *ngIf="isAuthenticated">
+        <a routerLink="/agenda" routerLinkActive="active">Agenda</a>
+      </li>
+      <li *ngIf="isAuthenticated">
+        <a href="#" (click)="logout()">Sair</a>
+      </li>
+    </ul>
+  </nav>
+</header>
