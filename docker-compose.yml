@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  jsonserver:
+    image: node:18-alpine
+    container_name: agenda-app-jsonserver
+    working_dir: /app
+    volumes:
+      - ./db.json:/app/db.json
+    ports:
+      - "3000:3000"
+    command: sh -c "npm install -g json-server && json-server --watch db.json --host 0.0.0.0 --port 3000"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000"]
+      interval: 5s
+      timeout: 2s
+      retries: 5
+    networks:
+      - agenda-net
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agenda-app-frontend
+    ports:
+      - "4200:4200"
+    depends_on:
+      jsonserver:
+        condition: service_healthy
+    networks:
+      - agenda-net
+
+networks:
+  agenda-net:
+    driver: bridge
